@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0b1220">
+<title>Ultimate Quiz V6.5</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+
+    <div class="brand-wrap">
+      <div class="logo-box">🧠</div>
+
+      <div class="brand-text">
+        <h1>Ultimate Quiz</h1>
+        <p>Think fast. Win smart.</p>
+      </div>
+    </div>
+
+    <div class="top-icons">
+      <button class="icon-btn" onclick="openStats()">📊</button>
+      <button class="icon-btn" onclick="openSettings()">⚙️</button>
+    </div>
+
+  </header>
+
+  <!-- HOME -->
+  <section id="homeScreen" class="screen active">
+
+    <!-- MINI STATUS -->
+    <div class="mini-grid">
+
+      <div class="mini-pill">
+        🪙 <span id="coinMini">0</span>
+      </div>
+
+      <div class="mini-pill">
+        🔥 <span id="streakMini">0</span>
+      </div>
+
+      <div class="mini-pill">
+        🏆 <span id="highMini">0</span>
+      </div>
+
+    </div>
+
+    <!-- QUIZ -->
+    <div class="card">
+
+      <div class="card-top">
+        <h2>🎮 Quiz Mode</h2>
+        <span class="tag blue">10 Questions</span>
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+
+        <div class="custom-select" id="quizCategoryBox">
+
+          <div class="select-selected" onclick="toggleSelect('quizCategoryBox')">
+            <span id="quizCategoryText">📚 General</span>
+            <span>▼</span>
+          </div>
+
+          <div class="select-items">
+            <div onclick="chooseOption('quizCategory','quizCategoryBox','📚 General')">📚 General</div>
+            <div onclick="chooseOption('quizCategory','quizCategoryBox','🧠 Brain')">🧠 Brain</div>
+            <div onclick="chooseOption('quizCategory','quizCategoryBox','⚛ Physics')">⚛ Physics</div>
+            <div onclick="chooseOption('quizCategory','quizCategoryBox','🧪 Chemistry')">🧪 Chemistry</div>
+            <div onclick="chooseOption('quizCategory','quizCategoryBox','➗ Math')">➗ Math</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Difficulty</label>
+
+        <div class="custom-select" id="quizDifficultyBox">
+
+          <div class="select-selected" onclick="toggleSelect('quizDifficultyBox')">
+            <span id="quizDifficultyText">🟢 Easy</span>
+            <span>▼</span>
+          </div>
+
+          <div class="select-items">
+            <div onclick="chooseOption('quizDifficulty','quizDifficultyBox','🟢 Easy')">🟢 Easy</div>
+            <div onclick="chooseOption('quizDifficulty','quizDifficultyBox','🟡 Medium')">🟡 Medium</div>
+            <div onclick="chooseOption('quizDifficulty','quizDifficultyBox','🔴 Hard')">🔴 Hard</div>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="main-btn" onclick="startQuiz()">
+        Start Quiz
+      </button>
+
+    </div>
+
+    <!-- EXAM -->
+    <div class="card">
+
+      <div class="card-top">
+        <h2>📝 Exam Center</h2>
+        <span class="tag purple">20 Questions</span>
+      </div>
+
+      <div class="field">
+        <label>Subject</label>
+
+        <div class="custom-select" id="examSubjectBox">
+
+          <div class="select-selected" onclick="toggleSelect('examSubjectBox')">
+            <span id="examSubjectText">🌍 Mixed</span>
+            <span>▼</span>
+          </div>
+
+          <div class="select-items">
+            <div onclick="chooseOption('examSubject','examSubjectBox','🌍 Mixed')">🌍 Mixed</div>
+            <div onclick="chooseOption('examSubject','examSubjectBox','📚 General')">📚 General</div>
+            <div onclick="chooseOption('examSubject','examSubjectBox','🧠 Brain')">🧠 Brain</div>
+            <div onclick="chooseOption('examSubject','examSubjectBox','⚛ Physics')">⚛ Physics</div>
+            <div onclick="chooseOption('examSubject','examSubjectBox','🧪 Chemistry')">🧪 Chemistry</div>
+            <div onclick="chooseOption('examSubject','examSubjectBox','➗ Math')">➗ Math</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Timer</label>
+
+        <div class="custom-select" id="examTimeBox">
+
+          <div class="select-selected" onclick="toggleSelect('examTimeBox')">
+            <span id="examTimeText">⏱ 20 Minutes</span>
+            <span>▼</span>
+          </div>
+
+          <div class="select-items">
+            <div onclick="chooseOption('examTime','examTimeBox','⏱ 10 Minutes')">⏱ 10 Minutes</div>
+            <div onclick="chooseOption('examTime','examTimeBox','⏱ 20 Minutes')">⏱ 20 Minutes</div>
+            <div onclick="chooseOption('examTime','examTimeBox','⏱ 30 Minutes')">⏱ 30 Minutes</div>
+            <div onclick="chooseOption('examTime','examTimeBox','⏱ 40 Minutes')">⏱ 40 Minutes</div>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="main-btn purple" onclick="startExam()">
+        Start Exam
+      </button>
+
+    </div>
+
+    <!-- EXTRA -->
+    <div class="grid-two">
+      <button class="small-btn" onclick="openStats()">📈 Stats</button>
+      <button class="small-btn gold">👑 Premium Soon</button>
+    </div>
+
+  </section>
+
+  <!-- GAME -->
+  <section id="gameScreen" class="screen">
+
+    <div class="card game-card">
+
+      <div class="game-top">
+        <span id="questionCount">Question 1/10</span>
+        <span id="timerText">00:00</span>
+      </div>
+
+      <div class="progress-wrap">
+        <div id="progressBar"></div>
+      </div>
+
+      <h2 id="questionText">Question appears here...</h2>
+
+      <div id="answersBox" class="answers"></div>
+
+      <div id="streakFire" class="streak-fire hidden">
+        🔥 STREAK!
+      </div>
+
+      <button id="nextBtn" class="main-btn" onclick="nextQuestion()">
+        Next
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- RESULT -->
+  <section id="resultScreen" class="screen">
+
+    <div class="card center">
+
+      <div class="big-emoji" id="resultEmoji">🏆</div>
+
+      <h2 id="resultTitle">Results</h2>
+
+      <h3 id="resultScore">0/10</h3>
+
+      <p id="resultExtra">Well done!</p>
+
+      <div class="mini-grid">
+
+        <div class="mini-pill">
+          🪙 +<span id="rewardCoins">0</span>
+        </div>
+
+        <div class="mini-pill">
+          🔥 <span id="rewardStreak">0</span>
+        </div>
+
+        <div class="mini-pill">
+          ⭐ <span id="accuracyText">0%</span>
+        </div>
+
+      </div>
+
+      <canvas id="confettiCanvas"></canvas>
+
+      <button class="main-btn" onclick="goHome()">
+        Home
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settingsScreen" class="screen">
+
+    <div class="card">
+
+      <div class="card-top">
+        <h2>⚙️ Settings</h2>
+        <button class="small-btn" onclick="goHome()">Back</button>
+      </div>
+
+      <button class="main-btn" onclick="setDark()">🌙 Dark Mode</button>
+      <button class="main-btn gray" onclick="setLight()">☀️ Light Mode</button>
+
+      <button class="small-btn toggle-btn" onclick="toggleSound()">
+        🔊 Sound: <span id="soundText">ON</span>
+      </button>
+
+      <button class="small-btn toggle-btn" onclick="toggleVibration()">
+        📳 Vibration: <span id="vibeText">ON</span>
+      </button>
+
+      <button class="main-btn red" onclick="resetData()">
+        Reset Data
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- STATS -->
+  <section id="statsScreen" class="screen">
+
+    <div class="card">
+
+      <div class="card-top">
+        <h2>📊 Stats</h2>
+        <button class="small-btn" onclick="goHome()">Back</button>
+      </div>
+
+      <div id="statsText" class="stats-box">
+        Loading...
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
